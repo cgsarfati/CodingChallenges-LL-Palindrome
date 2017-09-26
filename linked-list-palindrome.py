@@ -30,80 +30,40 @@ class LinkedList(object):
 
         self.tail = new_node
 
-    def print_list(self):
-        """Print all items in the list."""
+    def is_palindrome(head):
+        """Determine if linked list is a palindrome. Return True if so."""
 
-        current = self.head
+        # PSEUDOCODE:
+        # need to know if linked list is odd/even using runners
+        # if fast.next is none, means list is EVEN + slow is on MIDDLE item
+        # if fast is none, means list is ODD + slow is on MIDDLE item
 
-        while current is not None:
-            print current.data
-            current = current.next
+        # as we traverse, need to keep a list of node's DATA
+        # Even: once slow is on middle (and list filled), use stack by popping off
+        # last item on list after each check
+        # Odd: same as even except pop off last item in list before the check
 
-    def find(self, data):
-        """Does this data exist in our list?"""
+        # create runners
+        slow = head
+        fast = head
 
-        current = self.head
+        # keep track of letters in first half of the LL
+        stack = []
 
-        while current is not None:
-            if current.data == data:
-                return True
+        # traverse LL until slow in middle
+        while fast is not None and fast.next is not None:
+            stack.append(slow.data)
+            slow = slow.next
+            fast = fast.next.next
 
-            current = current.next
+        # account for odd number of items in LL
+        if fast is not None:
+            slow = slow.next
 
-        return False
+        # compare each letter in 2nd half of list to letters in 1st half
+        while slow is not None:
+            if slow.data != stack.pop():
+                return False
+            slow = slow.next
 
-    def remove(self, value):
-        """Remove node with given value"""
-
-        # If removing head, make 2nd item (if any) the new .head
-        if self.head is not None and self.head.data == value:
-            self.head = self.head.next
-            if self.head is None:
-                self.tail = None
-            return
-
-        # Removing something other than head
-        current = self.head
-
-        while current.next is not None:
-
-            if current.next.data == value:
-                current.next = current.next.next
-                if current.next is None:
-                    # If removing last item, update .tail
-                    self.tail = current
-                return
-
-            else:     # haven't found yet, keep traversing
-                current = current.next
-
-
-def is_palindrome():
-    """Determine if linked list is a palindrome."""
-
-    # need to know if linked list is odd/even using slow/fast runners
-    # if fast.next is none, means list is EVEN + slow is on MIDDLE item
-    # if fast is none, means list is ODD + slow is on MIDDLE item
-
-    # as we traverse, need to keep a list of node's DATA
-    # Even: once slow is on middle (and list filled), use stack by popping off
-    # last item on list after each check
-    # Odd: same as even except pop off last item in list before the check
-
-    # First, create a Linked List with 4 nodes
-    node1 = Node("T")
-    node2 = Node("O")
-    node3 = Node("O")
-    node4 = Node("T")
-
-    lst = LinkedList()
-
-    # Create runners
-    slow_runner = self.head
-    fast_runner = self.head.next
-
-    # Create empty list to attach data during traversal
-    lst_data = []
-
-    while
-
+        return True
