@@ -78,4 +78,32 @@ class LinkedList(object):
                 current = current.next
 
 
+def is_palindrome():
+    """Determine if linked list is a palindrome."""
+
+    # need to know if linked list is odd/even using slow/fast runners
+    # if fast.next is none, means list is EVEN + slow is on MIDDLE item
+    # if fast is none, means list is ODD + slow is on MIDDLE item
+
+    # as we traverse, need to keep a list of node's DATA
+    # Even: once slow is on middle (and list filled), use stack by popping off
+    # last item on list after each check
+    # Odd: same as even except pop off last item in list before the check
+
+    # First, create a Linked List with 4 nodes
+    node1 = Node("T")
+    node2 = Node("O")
+    node3 = Node("O")
+    node4 = Node("T")
+
+    lst = LinkedList()
+
+    # Create runners
+    slow_runner = self.head
+    fast_runner = self.head.next
+
+    # Create empty list to attach data during traversal
+    lst_data = []
+
+    while
 
